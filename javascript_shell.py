@@ -1,2 +1,10 @@
+from lexer import *
+
+def run(text):
+    lexer = Lexer(text)
+    tokens = lexer.tokens_list()
+    return tokens
+
 while True:
-    print(input('javascript>'))
+    user_input = input('javascript>')
+    print(run(user_input))
