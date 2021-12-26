@@ -10,7 +10,7 @@ class Lexer:
         self.next()
 
     def next(self):
-        # we advance to the next char
+        # we advance to the next char in the input
         if self.current_pos < len(self.text):
             self.current_char = self.text[self.current_pos]
         else: 
@@ -32,18 +32,25 @@ class Lexer:
                 self.next()
             elif self.current_char == '+':
                 tok.append(Token(T_PLUS))
+                self.next()
             elif self.current_char == '-':
                 tok.append(Token(T_MINUS))
+                self.next()
             elif self.current_char == '*':
                 tok.append(Token(T_MUL))
+                self.next()
             elif self.current_char == '/':
                 tok.append(Token(T_DIV))
+                self.next()
             elif self.current_char == '(':
                 tok.append(Token(L_PAREN))
+                self.next()
             elif self.current_char == ')':
                 tok.append(Token(R_PAREN))
+                self.next()
             elif self.current_char in DIGITS:
                 tok.append(self.create_number())
+                #self.next()
             else:
                 return("ERROR WRONG CHAR")
-            return tok
+        return tok

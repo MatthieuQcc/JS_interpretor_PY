@@ -14,9 +14,9 @@ L_PAREN = 'L_PAREN'
 R_PAREN = 'R_PAREN'
 
 class Token:    
-    def __init__(self, new_value, new_type) -> None:
-        self.type = new_type
+    def __init__(self, new_type, new_value = None) -> None:
         self.value = new_value
+        self.type = new_type
     
     def __repr__(self) -> str:
         if self.value: 
