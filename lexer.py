@@ -19,11 +19,21 @@ class Lexer:
     
     def create_number(self):
         my_number = ""
-        nbPoint = 0
-        while self.current_char in DIGITS:
-            my_number += self.current_char
+        is_float = False
+        while (self.current_char in DIGITS) | (self.current_char == '.'):
+            if self.current_char == '.':
+                if is_float:
+                    break
+                is_float = True
+                my_number += '.'
+            else:
+                my_number += self.current_char
             self.next()
-        return Token(T_INT, int(my_number))
+
+        if is_float:
+            return Token(T_FLOAT, float(my_number))
+        else:
+            return Token(T_INT, int(my_number))
 
     def tokens_list(self):
         tok = []
