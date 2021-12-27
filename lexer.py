@@ -19,6 +19,7 @@ class Lexer:
     
     def create_number(self):
         my_number = ""
+        nbPoint = 0
         while self.current_char in DIGITS:
             my_number += self.current_char
             self.next()
