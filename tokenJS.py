@@ -23,3 +23,5 @@ class Token:
             return f'{self.type} : {self.value}'
         else: 
             return f'{self.type}'
+
+

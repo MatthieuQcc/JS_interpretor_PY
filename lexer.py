@@ -2,8 +2,9 @@
 
 from tokenJS import *
 
+
 class Lexer:
-    def __init__(self, new_text : str) -> None:
+    def __init__(self, new_text: str) -> None:
         self.text = new_text
         self.current_pos = 0
         self.current_char = None
@@ -13,10 +14,10 @@ class Lexer:
         # we advance to the next char in the input
         if self.current_pos < len(self.text):
             self.current_char = self.text[self.current_pos]
-        else: 
+        else:
             self.current_char = None
         self.current_pos += 1
-    
+
     def create_number(self):
         my_number = ""
         is_float = False
@@ -61,7 +62,7 @@ class Lexer:
                 self.next()
             elif self.current_char in DIGITS:
                 tok.append(self.create_number())
-                #self.next()
+                # self.next()
             else:
-                return("ERROR WRONG CHAR")
+                return "ERROR WRONG CHAR"
         return tok
