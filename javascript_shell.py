@@ -1,3 +1,4 @@
+from interpreter import *
 from lexer import *
 from jsparser import *
 
@@ -11,7 +12,13 @@ def run(input):
     parser = Parser(tokens)
     ast = parser.parse()
 
-    return ast
+    # Run program
+    interpreter = Interpreter()
+    result = interpreter.visit(ast)
+
+    # return ast         # Voir l'ast
+
+    return result  # Voir le résultat obtenu
 
 
 while True:
