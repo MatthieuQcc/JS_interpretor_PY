@@ -25,9 +25,27 @@ class Parser:
         res = ParseResult()
         tok = self.current_tok
 
-        if tok.type in (T_INT, T_FLOAT):
+        if tok.type in (T_PLUS, T_MINUS):
+            res.register(self.advance())
+            factor = res.register(self.factor())
+            if res.error:
+                return res
+            return res.success(UnaryOpNode(tok, factor))
+
+        elif tok.type in (T_INT, T_FLOAT):
             res.register(self.advance())
             return res.success(NumberNode(tok))
+
+        elif tok.type == L_PAREN:
+            res.register(self.advance())
+            expr = res.register(self.expr())
+            if res.error: return res
+            if self.current_tok.type == R_PAREN:
+                res.register(self.advance())
+                return res.success(expr)
+            else:
+                return res.failure("Expected ')'")
+
         return res.failure("Expected int or float")
 
     def term(self):
