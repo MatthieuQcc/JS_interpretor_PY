@@ -1,6 +1,6 @@
 from interpreter import *
 from lexer import *
-from jsparser import *
+from javascript_parser import *
 
 
 def run(input):
@@ -14,13 +14,13 @@ def run(input):
     parser = Parser(tokens)
     ast = parser.parse()
 
-    return ast.node, ast.error              # Voir l'ast
+    # return ast.node, ast.error              # Voir l'ast
 
     # Run program
     interpreter = Interpreter()
-    result = interpreter.visit(ast)
+    result = interpreter.visit(ast.node)
 
-    # return result         # Voir le résultat obtenu
+    return result         # Voir le résultat obtenu
 
 
 while True:
