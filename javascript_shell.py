@@ -8,17 +8,19 @@ def run(input):
     lexer = Lexer(input)
     tokens = lexer.tokens_list()
 
+    # return tokens         # Voir les tokens
+
     # Generate AST
     parser = Parser(tokens)
     ast = parser.parse()
+
+    return ast.node, ast.error              # Voir l'ast
 
     # Run program
     interpreter = Interpreter()
     result = interpreter.visit(ast)
 
-    # return ast         # Voir l'ast
-
-    return result  # Voir le résultat obtenu
+    # return result         # Voir le résultat obtenu
 
 
 while True:

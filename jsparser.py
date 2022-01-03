@@ -1,5 +1,6 @@
 from tokenJS import *
 from ast import *
+from parser_result import *
 
 
 class Parser:
@@ -15,14 +16,19 @@ class Parser:
         return self.current_tok
 
     def parse(self):
+        res = self.expr()
+        if not res.error:
+            return res.failure("Invalid syntax error")
         return self.expr()
 
     def factor(self):
+        res = ParseResult()
         tok = self.current_tok
 
         if tok.type in (T_INT, T_FLOAT):
-            self.advance()
-            return NumberNode(tok)
+            res.register(self.advance())
+            return res.success(NumberNode(tok))
+        return res.failure("Expected int or float")
 
     def term(self):
         return self.bin_op(self.factor, (T_MUL, T_DIV))
@@ -31,12 +37,17 @@ class Parser:
         return self.bin_op(self.term, (T_MINUS, T_PLUS))
 
     def bin_op(self, func, ops):
-        left = func()
+        res = ParseResult()
+        left = res.register(func())
+        if res.error:
+            return res
 
         while self.current_tok.type in ops:
             op_tok = self.current_tok
-            self.advance()
-            right = func()
+            res.register(self.advance())
+            right = res.register(func())
+            if res.error:
+                return res
             left = BinOpNode(left, op_tok, right)
 
-        return left
+        return res.success(left)
