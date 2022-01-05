@@ -17,9 +17,9 @@ class Parser:
 
     def parse(self):
         res = self.expr()
-        if not res.error:
+        if res.error:
             return res.failure("Invalid syntax error")
-        return self.expr()
+        return res
 
     def factor(self):
         res = ParseResult()

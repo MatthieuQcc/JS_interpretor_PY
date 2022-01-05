@@ -1,6 +1,6 @@
 from interpreter import *
 from lexer import *
-from javascript_parser import *
+from parser_analyze import *
 
 
 def run(input):
@@ -17,10 +17,14 @@ def run(input):
     # return ast.node, ast.error              # Voir l'ast
 
     # Run program
-    interpreter = Interpreter()
-    result = interpreter.visit(ast.node)
+    #interpreter = Interpreter()
+    #result = interpreter.visit(ast.node)
 
-    return result         # Voir le résultat obtenu
+    if ast.error:
+        return ast.error
+    else:
+        return Interpreter().visit(ast.node)
+    # return result         # Voir le résultat obtenu
 
 
 while True:
