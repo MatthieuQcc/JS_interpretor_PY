@@ -8,23 +8,22 @@ def run(input):
     lexer = Lexer(input)
     tokens = lexer.tokens_list()
 
-    # return tokens         # Voir les tokens
+    # return tokens                             # Voir les tokens
 
     # Generate AST
     parser = Parser(tokens)
     ast = parser.parse()
 
-    # return ast.node, ast.error              # Voir l'ast
+    # return ast.node, ast.error                # Voir l'ast
+
+    # if ast.error:                             # Essai Gestion erreur
+    #   return ast.error
 
     # Run program
-    #interpreter = Interpreter()
-    #result = interpreter.visit(ast.node)
+    interpreter = Interpreter()
+    result = interpreter.visit(ast.node)
 
-    if ast.error:
-        return ast.error
-    else:
-        return Interpreter().visit(ast.node)
-    # return result         # Voir le résultat obtenu
+    return result                               # Voir le résultat obtenu
 
 
 while True:

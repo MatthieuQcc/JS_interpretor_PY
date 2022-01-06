@@ -38,7 +38,7 @@ class Lexer:
 
     def tokens_list(self):
         tok = []
-        while self.current_char != None:
+        while self.current_char is not None:
             # we ignore spaces and tabs for now
             if self.current_char == ' ' or self.current_char == '\t':
                 self.next()

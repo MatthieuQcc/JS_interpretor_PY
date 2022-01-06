@@ -1,5 +1,5 @@
 from tokenJS import *
-from ast import *
+from node import *
 from parser_result import *
 
 
